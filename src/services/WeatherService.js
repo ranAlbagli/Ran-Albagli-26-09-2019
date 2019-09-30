@@ -21,21 +21,21 @@ export default{
 
  async function getLocationAutoComplete(text){
      const res = await axios.get(
-     `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${text}`)    
+     `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${text}`)    
      return res.data
 
 }
 
 async function getCurrentWether(cityKey){
   const res = await axios.get(
-    `http://dataservice.accuweather.com/currentconditions/v1/${cityKey}?apikey=${API_KEY}`
+    `https://dataservice.accuweather.com/currentconditions/v1/${cityKey}?apikey=${API_KEY}`
   )    
   return res.data[0]
 }
 
 async function getForcastWeather(cityKey){ 
     const res = await axios.get(
-    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${API_KEY}`
+    `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${API_KEY}`
   )  
   return res.data.DailyForecasts
 }
