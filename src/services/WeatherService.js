@@ -1,0 +1,74 @@
+import axios from 'axios';
+// import storeService from './storeService'
+
+export default{
+    getLocationAutoComplete,
+    getCurrentWether,
+    getForcastWeather,
+    getUserCity
+}
+
+// const API_KEY ='Ri5y2eX4Y3kO65mtvxhPDAX7AsZ1tJb1'
+// const API_KEY ='m9lAGyPN4SxWZAFBBSghB43DxuBB1VDj '
+//  const API_KEY ='EDoXcIUtqNmGbRlLbqNReSUUtgmnUHt0'
+// const API_KEY ='Z4KPevJp0MDfG0b5GDxnJPnda24ExpSS'
+    // const API_KEY='be9SnLSTir8OGl4fmPVSfli1KakCeeUq'
+    // const API_KEY='e7680cb86def334be135f12d742a5ce4'
+    const API_KEY='X2rypXBseZ5wl2VSzcNvDJWkCQXiwaO4'
+    // const API_KEY = "UMCLRc9lAWet2ThAU6qZ2WxDvO00iMBC"
+    // const API_KEY ="LZf4XK3kGHRgqhtutmnWn27uAjSXck8c"
+    // const API_KEY ="09LiVV0CwwkX7LSWqT42NvnfDR5vsQG6Ae"
+
+ async function getLocationAutoComplete(text){
+     const res = await axios.get(
+     `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${text}`)    
+     return res.data
+
+}
+
+async function getCurrentWether(cityKey){
+  const res = await axios.get(
+    `http://dataservice.accuweather.com/currentconditions/v1/${cityKey}?apikey=${API_KEY}`
+  )    
+  return res.data[0]
+}
+
+async function getForcastWeather(cityKey){ 
+    const res = await axios.get(
+    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${API_KEY}`
+  )  
+  return res.data.DailyForecasts
+}
+
+
+async function getUserCity() {
+  const coords = await _getUserLocation();  
+  if (!coords) return;
+  const lat = coords.coords.latitude;
+  const lon = coords.coords.longitude;
+  try {
+    const res = await axios.get(
+      `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${lat}%2C${lon}`
+    );
+    const userCity = {
+      id: res.data.ParentCity.Key,
+      city: res.data.EnglishName,
+      country: res.data.Country.EnglishName,
+      isFav: false,
+    };
+    return userCity;
+  } catch (err) {
+    throw err;
+  }
+}
+
+
+function _getUserLocation() {
+  if (!navigator.geolocation) {
+    return;
+  } else {
+    return new Promise(function(resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  }
+}
