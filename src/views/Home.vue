@@ -31,7 +31,7 @@ export default {
         const telAvivCity = {city: "Tel-Aviv",country:'Israel',id:21584,isFav: false};        
         await this.$store.dispatch({ type: "setForecastWeather" ,city:telAvivCity});
         await this.$store.dispatch({ type: "setCurrentCity" ,city:telAvivCity});
-        this.$toasted.show(err.message,{duration:'2000'})
+        this.$toasted.show('User denied Geolocation',{duration:'2000'})
         console.log(err);
       }
     }

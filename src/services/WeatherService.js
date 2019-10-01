@@ -8,16 +8,9 @@ export default{
     getUserCity
 }
 
-// const API_KEY ='Ri5y2eX4Y3kO65mtvxhPDAX7AsZ1tJb1'
+const API_KEY ='Ri5y2eX4Y3kO65mtvxhPDAX7AsZ1tJb1'
 // const API_KEY ='m9lAGyPN4SxWZAFBBSghB43DxuBB1VDj '
-//  const API_KEY ='EDoXcIUtqNmGbRlLbqNReSUUtgmnUHt0'
-// const API_KEY ='Z4KPevJp0MDfG0b5GDxnJPnda24ExpSS'
-    // const API_KEY='be9SnLSTir8OGl4fmPVSfli1KakCeeUq'
-    // const API_KEY='e7680cb86def334be135f12d742a5ce4'
-    const API_KEY='X2rypXBseZ5wl2VSzcNvDJWkCQXiwaO4'
-    // const API_KEY = "UMCLRc9lAWet2ThAU6qZ2WxDvO00iMBC"
-    // const API_KEY ="LZf4XK3kGHRgqhtutmnWn27uAjSXck8c"
-    // const API_KEY ="09LiVV0CwwkX7LSWqT42NvnfDR5vsQG6Ae"
+
 
  async function getLocationAutoComplete(text){
      const res = await axios.get(
